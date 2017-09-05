@@ -111,7 +111,7 @@
         "location": "[resourceGroup().location]",
         "datalakename": "[concat('cddatalake',substring(variables('prefix'),0,4))]",
         "newTier": "Consumption",
-        "servicePrincipalObjectId": "[parameters('servicePrincipalObjectId')",
+        "servicePrincipalObjectId": "[parameters('servicePrincipalObjectId')]",
         "directorEnvironmentName": "Director_Azure_Deployment",
         "dnsNameSuffix": "[concat('cldr',substring(variables('prefix'),0,3),'.local')]",
         "virtualNetworkName": "clouderavnet",
