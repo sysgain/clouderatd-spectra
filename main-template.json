@@ -1,7 +1,38 @@
 {
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
     "contentVersion": "1.0.0.0",
-    "parameters": {},
+    "parameters": {
+        "AzureSubscriptionID":{
+            "type": "string",
+            "metadata": {
+                "description":"The Azure Subscription ID to be used by Cloudera Director."
+            }
+        },
+            "AzureActiveDirectoryTenantID":{
+                "type": "string",
+                "metadata": {
+                    "description":"The Azure Active Directory Tenant ID to be used by Cloudera Director."
+                }
+            },
+            "AzureActiveDirectoryClientID":{
+                "type": "string",
+                "metadata": {
+                    "description":"ID of the Azure Active Directory (AAD) Service Principal Cloudera Director uses to authenticate with Azure. You must create a Service Principal in AAD prior to deploying this template."
+                }
+            },
+            "AzureActiveDirectoryClientSecret":{
+                "type": "string",
+                "metadata": {
+                    "description":"This is the secret/password of the Azure Active Directory Service principal specified above."
+                }
+            },
+            "servicePrincipalObjectId": {
+                "type": "string",
+                "metadata": {
+                    "description": "The AAD object ID (guid) of the service principal. This service principal will be given permissions on the root folder of the Data Lake Store account."
+                }
+            }
+    },
     "variables": {
         "scriptsUri": "https://raw.githubusercontent.com/sysgain/clouderatd-spectra/master/",
         "share-resourcesUri": "[concat(variables('scriptsUri'), 'nested/shared-resources-new-vnet.json')]",
@@ -22,10 +53,10 @@
         "clusterParameters": {
             "envName": "[variables('directorEnvironmentName')]",
             "location": "[resourceGroup().location]",
-            "subId": "7eab3893-bd71-4690-84a5-47624df0b0e5",
-            "tenantId": "dcf9e4d3-f44a-4c28-be12-8245c0d35668",
-            "clientId": "d4962dd2-e97e-4f3e-aa00-45e202305782",
-            "clientSecret": "+u9VpFP/ZeqpBKuKoLcAUV8vQmB9xwOhi+RZT7Am/Ys=",
+            "subId": "[parameters('AzureSubscriptionID')]",
+            "tenantId": "[parameters('AzureActiveDirectoryTenantID')]",
+            "clientId": "[parameters('AzureActiveDirectoryClientID')]",
+            "clientSecret": "[parameters('AzureActiveDirectoryClientSecret')]",
             "adminUsername": "cloudera",
             "keyFileName": "sshKeyForAzureVM",
             "networkSecurityGroupResourceGroup": "[resourceGroup().name]",
@@ -38,9 +69,9 @@
             "dbAddress": "10.3.0.4",
             "dbUsername": "dbadmin",
             "dbPassword": "Sysgain@1234",
-            "masterType": "Standard_DS14",
-            "workerType": "Standard_DS14",
-            "edgeType": "Standard_DS14",
+            "masterType": "Standard_DS13",
+            "workerType": "Standard_DS13",
+            "edgeType": "Standard_DS13",
             "dirUsername": "cloudera",
             "dirPassword": "Sysgain@1234"
         },
@@ -80,7 +111,7 @@
         "location": "[resourceGroup().location]",
         "datalakename": "[concat('cddatalake',substring(variables('prefix'),0,4))]",
         "newTier": "Consumption",
-        "servicePrincipalObjectId": "c205a1a1-92fc-499c-a77a-917bfc78e24e",
+        "servicePrincipalObjectId": "[parameters('servicePrincipalObjectId')",
         "directorEnvironmentName": "Director_Azure_Deployment",
         "dnsNameSuffix": "[concat('cldr',substring(variables('prefix'),0,3),'.local')]",
         "virtualNetworkName": "clouderavnet",
