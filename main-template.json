@@ -34,7 +34,7 @@
         }
     },
     "variables": {
-        "scriptsUri": "https://raw.githubusercontent.com/sysgain/clouderatd-spectra/master/",
+        "scriptsUri": "https://raw.githubusercontent.com/sysgain/clouderatd-spektra/master/",
         "share-resourcesUri": "[concat(variables('scriptsUri'), 'nested/shared-resources-new-vnet.json')]",
         "vnetUri": "[concat(variables('scriptsUri'), 'nested/update-new-vnet-dns.json')]",
         "networkRestartUri": "[concat(variables('scriptsUri'), 'nested/network-restart-new-vnet.json')]",
