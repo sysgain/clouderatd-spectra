@@ -2,36 +2,36 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "AzureSubscriptionID":{
+        "AzureSubscriptionID": {
             "type": "string",
             "metadata": {
-                "description":"The Azure Subscription ID to be used by Cloudera Director."
+                "description": "The Azure Subscription ID to be used by Cloudera Director."
             }
         },
-            "AzureActiveDirectoryTenantID":{
-                "type": "string",
-                "metadata": {
-                    "description":"The Azure Active Directory Tenant ID to be used by Cloudera Director."
-                }
-            },
-            "AzureActiveDirectoryClientID":{
-                "type": "string",
-                "metadata": {
-                    "description":"ID of the Azure Active Directory (AAD) Service Principal Cloudera Director uses to authenticate with Azure. You must create a Service Principal in AAD prior to deploying this template."
-                }
-            },
-            "AzureActiveDirectoryClientSecret":{
-                "type": "string",
-                "metadata": {
-                    "description":"This is the secret/password of the Azure Active Directory Service principal specified above."
-                }
-            },
-            "servicePrincipalObjectId": {
-                "type": "string",
-                "metadata": {
-                    "description": "The AAD object ID (guid) of the service principal. This service principal will be given permissions on the root folder of the Data Lake Store account."
-                }
+        "AzureActiveDirectoryTenantID": {
+            "type": "string",
+            "metadata": {
+                "description": "The Azure Active Directory Tenant ID to be used by Cloudera Director."
             }
+        },
+        "AzureActiveDirectoryClientID": {
+            "type": "string",
+            "metadata": {
+                "description": "ID of the Azure Active Directory (AAD) Service Principal Cloudera Director uses to authenticate with Azure. You must create a Service Principal in AAD prior to deploying this template."
+            }
+        },
+        "AzureActiveDirectoryClientSecret": {
+            "type": "string",
+            "metadata": {
+                "description": "This is the secret/password of the Azure Active Directory Service principal specified above."
+            }
+        },
+        "servicePrincipalObjectId": {
+            "type": "string",
+            "metadata": {
+                "description": "The AAD object ID (guid) of the service principal. This service principal will be given permissions on the root folder of the Data Lake Store account."
+            }
+        }
     },
     "variables": {
         "scriptsUri": "https://raw.githubusercontent.com/sysgain/clouderatd-spectra/master/",
@@ -106,7 +106,7 @@
         "newVNetId": "[resourceId(concat('Microsoft.Network','/','virtualNetworks'),variables('virtualNetworkName'))]",
         "VNetId": "[variables(concat(variables('vnetNewOrExisting'),'VNetId'))]",
         "prefix": "[uniqueString(resourceGroup().id)]",
-         "datalakeDirName":"[concat('demotd',substring(variables('prefix'),0,4))]",
+        "datalakeDirName": "[concat('demotd',substring(variables('prefix'),0,4))]",
         "dnsNamePrefix": "[concat('cldr',substring(variables('prefix'),0,4))]",
         "location": "[resourceGroup().location]",
         "datalakename": "[concat('cddatalake',substring(variables('prefix'),0,4))]",
@@ -314,7 +314,7 @@
                 }
             }
         },
-         {
+        {
             "name": "HdfsDataLakeSetup",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "[variables('version').templateAPIVersion]",
@@ -337,36 +337,36 @@
                     "version": {
                         "value": "[variables('version')]"
                     },
-                     "scriptsUri": {
+                    "scriptsUri": {
                         "value": "[variables('scriptsUri')]"
                     },
                     "vmSpec": {
                         "value": "[variables('vmSpec')]"
                     },
-                    "datalakeDirName":{
+                    "datalakeDirName": {
                         "value": "[variables('datalakeDirName')]"
                     },
-                    "datalakeEndPoint":{
-                        "value":"[concat('adl://',variables('datalakename'),'.azuredatalakestore.net')]"
+                    "datalakeEndPoint": {
+                        "value": "[concat('adl://',variables('datalakename'),'.azuredatalakestore.net')]"
                     }
-                 }
+                }
             }
         }
     ],
     "outputs": {
-        "vmAdminUserName":{
+        "vmAdminUserName": {
             "type": "string",
             "value": "[variables('clusterParameters').adminUsername]"
         },
-        "vmAdminPassword":{
+        "vmAdminPassword": {
             "type": "string",
             "value": "[variables('vmSpec').adminPassword]"
         },
-         "Director-fqdn": {
+        "Director-fqdn": {
             "type": "string",
             "value": "[concat(reference('director-node').outputs.directorFqdn.value)]"
         },
-         "Director-WEBUI-Url": {
+        "Director-WEBUI-Url": {
             "type": "string",
             "value": "[concat(reference('director-node').outputs.directorFqdn.value,':7189')]"
         },
@@ -378,11 +378,11 @@
             "type": "string",
             "value": "[variables('clusterParameters').dirPassword]"
         },
-        "Manager-WEBUI-Username":{
+        "Manager-WEBUI-Username": {
             "type": "string",
             "value": "admin"
         },
-        "Manager-WEBUI-Password":{
+        "Manager-WEBUI-Password": {
             "type": "string",
             "value": "admin"
         }
