@@ -2,18 +2,6 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "AzureSubscriptionID": {
-            "type": "string",
-            "metadata": {
-                "description": "The Azure Subscription ID to be used by Cloudera Director."
-            }
-        },
-        "AzureActiveDirectoryTenantID": {
-            "type": "string",
-            "metadata": {
-                "description": "The Azure Active Directory Tenant ID to be used by Cloudera Director."
-            }
-        },
         "AzureActiveDirectoryClientID": {
             "type": "securestring",
             "metadata": {
@@ -34,6 +22,8 @@
         }
     },
     "variables": {
+        "AzureSubscriptionID": "[subscription().subscriptionId]",
+        "AzureActiveDirectoryTenantID": "[subscription().tenantId]",
         "scriptsUri": "https://raw.githubusercontent.com/sysgain/clouderatd-spektra/master/",
         "share-resourcesUri": "[concat(variables('scriptsUri'), 'nested/shared-resources-new-vnet.json')]",
         "vnetUri": "[concat(variables('scriptsUri'), 'nested/update-new-vnet-dns.json')]",
@@ -53,8 +43,8 @@
         "clusterParameters": {
             "envName": "[variables('directorEnvironmentName')]",
             "location": "[resourceGroup().location]",
-            "subId": "[parameters('AzureSubscriptionID')]",
-            "tenantId": "[parameters('AzureActiveDirectoryTenantID')]",
+            "subId": "[variables('AzureSubscriptionID')]",
+            "tenantId": "[variables('AzureActiveDirectoryTenantID')]",
             "clientId": "[parameters('AzureActiveDirectoryClientID')]",
             "clientSecret": "[parameters('AzureActiveDirectoryClientSecret')]",
             "adminUsername": "cloudera",
