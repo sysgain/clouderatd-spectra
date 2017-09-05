@@ -15,19 +15,19 @@
             }
         },
         "AzureActiveDirectoryClientID": {
-            "type": "string",
+            "type": "securestring",
             "metadata": {
                 "description": "ID of the Azure Active Directory (AAD) Service Principal Cloudera Director uses to authenticate with Azure. You must create a Service Principal in AAD prior to deploying this template."
             }
         },
         "AzureActiveDirectoryClientSecret": {
-            "type": "string",
+            "type": "securestring",
             "metadata": {
                 "description": "This is the secret/password of the Azure Active Directory Service principal specified above."
             }
         },
         "servicePrincipalObjectId": {
-            "type": "string",
+            "type": "securestring",
             "metadata": {
                 "description": "The AAD object ID (guid) of the service principal. This service principal will be given permissions on the root folder of the Data Lake Store account."
             }
