@@ -338,6 +338,15 @@
                     },
                     "datalakeEndPoint": {
                         "value": "[concat('adl://',variables('datalakename'),'.azuredatalakestore.net')]"
+                    },
+                    "AzureActiveDirectoryClientID": {
+                        "value": "[parameters('AzureActiveDirectoryClientID')]"
+                    },
+                    "AzureActiveDirectoryClientSecret": {
+                        "value": "[parameters('AzureActiveDirectoryClientSecret')]"
+                    },
+                    "AzuretenantID":{
+                        "value": "[variables('AzureActiveDirectoryTenantID')]"
                     }
                 }
             }
