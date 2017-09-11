@@ -2,6 +2,9 @@
 adminpassword=$1
 datalakeDirName=$2
 datalakeEndPoint=$3
+clientId=$4
+tenantId=$5
+clientSecret=$6
 MangerIP="10.3.0.5"
 DirectorIP="10.3.0.4"
 curl -u admin:admin 'http://'${MangerIP}':7180/api/v1/clusters/Director_Azure_Deployment/services' > /tmp/ClouderaServices
@@ -9,11 +12,11 @@ cat /tmp/ClouderaServices  | grep 'serviceUrl' | awk -F'/' '{print $6}' | tr -d 
 HDFS=`grep HDFS /tmp/CServices`
 echo $HDFS
 Name1="dfs.adls.oauth2.client.id"
-Value1="8d2a616c-0d1c-43f6-add1-ec0ff5d9ff68"
+Value1="${clientId}"
 Name2="dfs.adls.oauth2.refresh.url"
-Value2="https://login.windows.net/dcf9e4d3-f44a-4c28-be12-8245c0d35668/oauth2/token"
+Value2="https://login.windows.net/${tenantId}/oauth2/token"
 Name3="dfs.adls.oauth2.credential"
-Value3="Q7S5fTAM+1pNzc6RCk0k3kwYwfa9CQjKCr/Oxyynl9A="
+Value3="${clientSecret}"
 Name4="dfs.adls.oauth2.access.token.provider.type"
 Value4="ClientCredential"
 Name5="fs.adl.impl"
