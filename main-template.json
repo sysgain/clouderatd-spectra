@@ -345,7 +345,7 @@
                     "AzureActiveDirectoryClientSecret": {
                         "value": "[parameters('AzureActiveDirectoryClientSecret')]"
                     },
-                    "AzuretenantID":{
+                    "AzuretenantID": {
                         "value": "[variables('AzureActiveDirectoryTenantID')]"
                     }
                 }
