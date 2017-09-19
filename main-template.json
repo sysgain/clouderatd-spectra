@@ -124,7 +124,7 @@
         "virtualMachineSize":"Standard_DS12_v2",
         "publicIpAddressName":"clouderpublicip",
         "publicIpAddressType":"dynamic",
-        "virtualMachineName":"cdwin_vm"
+        "virtualMachineName":"cdwinvm"
     },
     "resources": [
         {
